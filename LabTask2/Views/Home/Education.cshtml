@@ -1,0 +1,39 @@
+﻿﻿
+@{
+    ViewBag.Title = "Education";
+}
+
+<h2>Education</h2>
+<table class="table table-bordered">
+    <tr>
+        <td><b>Degree</b></td>
+        <td><b>Year</b></td>
+        <td><b>Instituitions</b></td>
+    </tr>
+    @foreach (var item in ViewBag.Education)
+    {
+        <tr>
+            <td>@item.Degree</td>
+            <td>@item.Year</td>
+            <td>@item.Instituitions</td>
+        </tr>
+
+    }
+</table>
+<div class="row">
+    <div class="col-md-4">
+        <h2>Personal Information</h2>
+        <p></p>
+        <p><a class="btn btn-default" href="/Home/PersonalInfo">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Projects</h2>
+        <p></p>
+        <p><a class="btn btn-default" href="/Home/Projects">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>References</h2>
+        <p></p>
+        <p><a class="btn btn-default" href="/Home/Ref">Learn more &raquo;</a></p>
+    </div>
+</div>
