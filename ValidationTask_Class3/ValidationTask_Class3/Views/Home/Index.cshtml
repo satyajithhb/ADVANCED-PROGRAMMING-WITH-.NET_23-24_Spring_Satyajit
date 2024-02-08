@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<h2>Index</h2>
+<form action="" method="post">
+    <input type="text" name="Name" value="@Model.Name" placeholder="Enter your Name" class="form-control" />
+    <span class="text-danger">@Html.ValidationMessage("Name")</span>
+    <br />
+    <input type="text" name="Uname" value="@Model.Uname" placeholder="Enter your Username" class="form-control" />
+    <span class="text-danger">@Html.ValidationMessage("Uname")</span>
+    <br />
+    <input type="text" name="Id" value="@Model.Id" placeholder="Enter your valid ID" class="form-control" />
+    <span class="text-danger">@Html.ValidationMessage("Id")</span>
+    <br />
+    <input type="email" name="Email" value="@Model.Email" placeholder="Enter your edu mail" class="form-control" />
+    <span class="text-danger">@Html.ValidationMessage("Email")</span>
+    <br />
+    <input type="submit" value="Sign Up" class="btn btn-danger" />
+</form>
