@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MidAssignmentModelStoreContainer" CdmEntityContainer="MidAssignmentEntities">
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="MidAssignmentModel.Employee">
+        <MappingFragment StoreEntitySet="Employees">
+          <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+          <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+          <ScalarProperty Name="EmpAddress" ColumnName="EmpAddress" />
+          <ScalarProperty Name="EmpContact" ColumnName="EmpContact" />
+          <ScalarProperty Name="EmpUser" ColumnName="EmpUser" />
+          <ScalarProperty Name="EmpPass" ColumnName="EmpPass" />
+          <ScalarProperty Name="NgoId" ColumnName="NgoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NGOes">
+      <EntityTypeMapping TypeName="MidAssignmentModel.NGO">
+        <MappingFragment StoreEntitySet="NGO">
+          <ScalarProperty Name="NgoID" ColumnName="NgoID" />
+          <ScalarProperty Name="NgoName" ColumnName="NgoName" />
+          <ScalarProperty Name="NgoAddress" ColumnName="NgoAddress" />
+          <ScalarProperty Name="NgoContact" ColumnName="NgoContact" />
+          <ScalarProperty Name="NgoUser" ColumnName="NgoUser" />
+          <ScalarProperty Name="NgoPass" ColumnName="NgoPass" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Restaurants">
+      <EntityTypeMapping TypeName="MidAssignmentModel.Restaurant">
+        <MappingFragment StoreEntitySet="Restaurants">
+          <ScalarProperty Name="ResId" ColumnName="ResId" />
+          <ScalarProperty Name="ResName" ColumnName="ResName" />
+          <ScalarProperty Name="ResAddress" ColumnName="ResAddress" />
+          <ScalarProperty Name="ResContact" ColumnName="ResContact" />
+          <ScalarProperty Name="ResUser" ColumnName="ResUser" />
+          <ScalarProperty Name="ResPass" ColumnName="ResPass" />
+          <ScalarProperty Name="NgoId" ColumnName="NgoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Collect_Requests">
+      <EntityTypeMapping TypeName="MidAssignmentModel.Collect_Request">
+        <MappingFragment StoreEntitySet="Collect Requests">
+          <ScalarProperty Name="NgoId" ColumnName="NgoId" />
+          <ScalarProperty Name="Distribution_Status" ColumnName="Distribution_Status" />
+          <ScalarProperty Name="Employee_id" ColumnName="Employee_id" />
+          <ScalarProperty Name="Employee_Status" ColumnName="Employee_Status" />
+          <ScalarProperty Name="Request_Time" ColumnName="Request_Time" />
+          <ScalarProperty Name="Preservation_Time" ColumnName="Preservation_Time" />
+          <ScalarProperty Name="Food_Quantity" ColumnName="Food_Quantity" />
+          <ScalarProperty Name="Food_Description" ColumnName="Food_Description" />
+          <ScalarProperty Name="Food_Name" ColumnName="Food_Name" />
+          <ScalarProperty Name="RestaurantsId" ColumnName="RestaurantsId" />
+          <ScalarProperty Name="CollectReqId" ColumnName="CollectReqId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

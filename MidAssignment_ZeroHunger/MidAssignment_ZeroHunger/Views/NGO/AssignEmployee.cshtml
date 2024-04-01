@@ -1,0 +1,36 @@
+﻿@model MidAssignment_ZeroHunger.Models.AssignEmployeeViewModel
+
+@{
+    ViewBag.Title = "Assign Employee";
+}
+
+<h2>Assign Employee</h2>
+
+@using (Html.BeginForm("ProcessAssignEmployee", "NGO", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Assign Employee</h4>
+        <hr />
+
+        @Html.DropDownListFor(model => model.SelectedRequest, new SelectList(Model.UnassignedRequests, "CollectReqId", "CollectReqId"), "Select a Request", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.SelectedRequest, "", new { @class = "text-danger" })
+
+        @Html.DropDownListFor(model => model.SelectedEmployee, Model.AvailableEmployees, "Select an Employee", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.SelectedEmployee, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Assign" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+<div>
+    @Html.ActionLink("Go to Dashboard", "Dashboard")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

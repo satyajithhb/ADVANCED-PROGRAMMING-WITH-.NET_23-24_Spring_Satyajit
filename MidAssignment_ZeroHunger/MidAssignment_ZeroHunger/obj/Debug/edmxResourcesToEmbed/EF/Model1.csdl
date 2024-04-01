@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MidAssignmentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="EmpId" />
+    </Key>
+    <Property Name="EmpId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmpName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EmpAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EmpContact" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EmpUser" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EmpPass" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NgoId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="NGO" Relationship="Self.FK_Employees_NGO" FromRole="Employees" ToRole="NGO" />
+    <NavigationProperty Name="Collect_Requests" Relationship="MidAssignmentModel.FK_Collect_Requests_Employees" FromRole="Employee" ToRole="Collect_Request" />
+  </EntityType>
+  <EntityType Name="NGO">
+    <Key>
+      <PropertyRef Name="NgoID" />
+    </Key>
+    <Property Name="NgoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NgoName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NgoAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NgoContact" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NgoUser" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NgoPass" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Employees" Relationship="Self.FK_Employees_NGO" FromRole="NGO" ToRole="Employees" />
+    <NavigationProperty Name="Restaurants" Relationship="Self.FK_Restaurants_NGO" FromRole="NGO" ToRole="Restaurants" />
+    <NavigationProperty Name="Collect_Requests" Relationship="MidAssignmentModel.FK_Collect_Requests_NGO" FromRole="NGO" ToRole="Collect_Request" />
+  </EntityType>
+  <EntityType Name="Restaurant">
+    <Key>
+      <PropertyRef Name="ResId" />
+    </Key>
+    <Property Name="ResId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ResName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ResAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ResContact" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ResUser" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ResPass" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NgoId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="NGO" Relationship="Self.FK_Restaurants_NGO" FromRole="Restaurants" ToRole="NGO" />
+    <NavigationProperty Name="Collect_Requests" Relationship="MidAssignmentModel.FK_Collect_Requests_Restaurants" FromRole="Restaurant" ToRole="Collect_Request" />
+  </EntityType>
+  <Association Name="FK_Employees_NGO">
+    <End Role="NGO" Type="Self.NGO" Multiplicity="1" />
+    <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NGO">
+        <PropertyRef Name="NgoID" />
+      </Principal>
+      <Dependent Role="Employees">
+        <PropertyRef Name="NgoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Restaurants_NGO">
+    <End Role="NGO" Type="Self.NGO" Multiplicity="1" />
+    <End Role="Restaurants" Type="Self.Restaurant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NGO">
+        <PropertyRef Name="NgoID" />
+      </Principal>
+      <Dependent Role="Restaurants">
+        <PropertyRef Name="NgoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MidAssignmentEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Employees" EntityType="Self.Employee" />
+    <EntitySet Name="NGOes" EntityType="Self.NGO" />
+    <EntitySet Name="Restaurants" EntityType="Self.Restaurant" />
+    <AssociationSet Name="FK_Employees_NGO" Association="Self.FK_Employees_NGO">
+      <End Role="NGO" EntitySet="NGOes" />
+      <End Role="Employees" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Restaurants_NGO" Association="Self.FK_Restaurants_NGO">
+      <End Role="NGO" EntitySet="NGOes" />
+      <End Role="Restaurants" EntitySet="Restaurants" />
+    </AssociationSet>
+    <EntitySet Name="Collect_Requests" EntityType="MidAssignmentModel.Collect_Request" />
+    <AssociationSet Name="FK_Collect_Requests_Employees" Association="MidAssignmentModel.FK_Collect_Requests_Employees">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Collect_Request" EntitySet="Collect_Requests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Collect_Requests_NGO" Association="MidAssignmentModel.FK_Collect_Requests_NGO">
+      <End Role="NGO" EntitySet="NGOes" />
+      <End Role="Collect_Request" EntitySet="Collect_Requests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Collect_Requests_Restaurants" Association="MidAssignmentModel.FK_Collect_Requests_Restaurants">
+      <End Role="Restaurant" EntitySet="Restaurants" />
+      <End Role="Collect_Request" EntitySet="Collect_Requests" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Collect_Request">
+    <Key>
+      <PropertyRef Name="CollectReqId" />
+    </Key>
+    <Property Name="CollectReqId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RestaurantsId" Type="Int32" Nullable="false" />
+    <Property Name="Food_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Food_Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Food_Quantity" Type="Int32" Nullable="false" />
+    <Property Name="Preservation_Time" Type="Int32" Nullable="false" />
+    <Property Name="Request_Time" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Employee_Status" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Employee_id" Type="Int32" />
+    <Property Name="Distribution_Status" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="NgoId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Employee" Relationship="MidAssignmentModel.FK_Collect_Requests_Employees" FromRole="Collect_Request" ToRole="Employee" />
+    <NavigationProperty Name="NGO" Relationship="MidAssignmentModel.FK_Collect_Requests_NGO" FromRole="Collect_Request" ToRole="NGO" />
+    <NavigationProperty Name="Restaurant" Relationship="MidAssignmentModel.FK_Collect_Requests_Restaurants" FromRole="Collect_Request" ToRole="Restaurant" />
+  </EntityType>
+  <Association Name="FK_Collect_Requests_Employees">
+    <End Type="MidAssignmentModel.Employee" Role="Employee" Multiplicity="0..1" />
+    <End Type="MidAssignmentModel.Collect_Request" Role="Collect_Request" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmpId" />
+      </Principal>
+      <Dependent Role="Collect_Request">
+        <PropertyRef Name="Employee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Collect_Requests_NGO">
+    <End Type="MidAssignmentModel.NGO" Role="NGO" Multiplicity="1" />
+    <End Type="MidAssignmentModel.Collect_Request" Role="Collect_Request" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NGO">
+        <PropertyRef Name="NgoID" />
+      </Principal>
+      <Dependent Role="Collect_Request">
+        <PropertyRef Name="NgoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Collect_Requests_Restaurants">
+    <End Type="MidAssignmentModel.Restaurant" Role="Restaurant" Multiplicity="1" />
+    <End Type="MidAssignmentModel.Collect_Request" Role="Collect_Request" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Restaurant">
+        <PropertyRef Name="ResId" />
+      </Principal>
+      <Dependent Role="Collect_Request">
+        <PropertyRef Name="RestaurantsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,44 @@
+﻿@model List<MidAssignment_ZeroHunger.DTOs.CollectRequestDTO>
+
+@{
+    ViewBag.Title = "Collection Requests";
+}
+
+<h2>Your Distribution Information</h2>
+
+@if (Model.Count > 0)
+{
+    <table class="table" border="1">
+        <thead>
+            <tr>
+                <th>Food Name</th>
+                <th>Food Description</th>
+                <th>Food Quantity</th>
+                <th>Maximum Preservation Time</th>
+                <th>Request Time</th>
+                <th>Distribution Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var request in Model)
+            {
+                <tr>
+                    <td>@request.Food_Name</td>
+                    <td>@request.Food_Description</td>
+                    <td>@request.Food_Quantity</td>
+                    <td>@request.Preservation_Time</td>
+                    <td>@request.Request_Time</td>
+                    <td>@request.Distribution_Status</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h3>No information found.</h3>
+}
+
+<div>
+    @Html.ActionLink("Go to Dashboard", "Dashboard")
+</div>

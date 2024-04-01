@@ -1,0 +1,92 @@
+﻿@model Tuple<IEnumerable<MidAssignment_ZeroHunger.DTOs.NgoDTO>, IEnumerable<MidAssignment_ZeroHunger.DTOs.EmployeesDTO>>
+
+@{
+    ViewBag.Title = "Dashboard";
+}
+<h2>Welcome to the dashboard, @Session["LoggedInNGOName"]!</h2>
+<p>
+    @Html.ActionLink("All Collection Requests", "ShowAllCollectionReq", "NGO", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Manage Unassigned Requests", "ShowUnassignedReq", "NGO", null, new { @class = "btn btn-primary" })
+</p>
+<h3>NGO Information</h3>
+<table class="table" border="1">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Address
+        </th>
+        <th>
+            Contact
+        </th>
+        <th>
+            Username
+        </th>
+        <th>
+            Password
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Item1)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgoName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgoAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgoContact)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgoUser)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgoPass)
+            </td>
+        </tr>
+    }
+</table>
+
+<h3>All Employees Information</h3>
+<table class="table" border="1">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Address
+        </th>
+        <th>
+            Contact
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Item2)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpContact)
+            </td>
+        </tr>
+    }
+</table>
+
+@using (Html.BeginForm("Logout", "NGO", FormMethod.Post))
+{
+    <button type="submit" class="btn btn-danger">Logout</button>
+}

@@ -1,0 +1,380 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MidAssignmentModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Collect Requests">
+          <Key>
+            <PropertyRef Name="CollectReqId" />
+          </Key>
+          <Property Name="CollectReqId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RestaurantsId" Type="int" Nullable="false" />
+          <Property Name="Food_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Food_Description" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Food_Quantity" Type="int" Nullable="false" />
+          <Property Name="Preservation_Time" Type="int" Nullable="false" />
+          <Property Name="Request_Time" Type="datetime" Nullable="false" />
+          <Property Name="Employee_Status" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Employee_id" Type="int" />
+          <Property Name="Distribution_Status" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="NgoId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="EmpId" />
+          </Key>
+          <Property Name="EmpId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmpName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmpAddress" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmpContact" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="EmpUser" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="EmpPass" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="NgoId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NGO">
+          <Key>
+            <PropertyRef Name="NgoID" />
+          </Key>
+          <Property Name="NgoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NgoName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NgoAddress" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NgoContact" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="NgoUser" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="NgoPass" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Restaurants">
+          <Key>
+            <PropertyRef Name="ResId" />
+          </Key>
+          <Property Name="ResId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ResName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ResAddress" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ResContact" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="ResUser" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ResPass" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="NgoId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Collect Requests_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="Collect Requests" Type="Self.Collect Requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="EmpId" />
+            </Principal>
+            <Dependent Role="Collect Requests">
+              <PropertyRef Name="Employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Collect Requests_NGO">
+          <End Role="NGO" Type="Self.NGO" Multiplicity="1" />
+          <End Role="Collect Requests" Type="Self.Collect Requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NGO">
+              <PropertyRef Name="NgoID" />
+            </Principal>
+            <Dependent Role="Collect Requests">
+              <PropertyRef Name="NgoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Collect Requests_Restaurants">
+          <End Role="Restaurants" Type="Self.Restaurants" Multiplicity="1" />
+          <End Role="Collect Requests" Type="Self.Collect Requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurants">
+              <PropertyRef Name="ResId" />
+            </Principal>
+            <Dependent Role="Collect Requests">
+              <PropertyRef Name="RestaurantsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_NGO">
+          <End Role="NGO" Type="Self.NGO" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NGO">
+              <PropertyRef Name="NgoID" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="NgoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Restaurants_NGO">
+          <End Role="NGO" Type="Self.NGO" Multiplicity="1" />
+          <End Role="Restaurants" Type="Self.Restaurants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NGO">
+              <PropertyRef Name="NgoID" />
+            </Principal>
+            <Dependent Role="Restaurants">
+              <PropertyRef Name="NgoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MidAssignmentModelStoreContainer">
+          <EntitySet Name="Collect Requests" EntityType="Self.Collect Requests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NGO" EntityType="Self.NGO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Restaurants" EntityType="Self.Restaurants" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Collect Requests_Employees" Association="Self.FK_Collect Requests_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Collect Requests" EntitySet="Collect Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Collect Requests_NGO" Association="Self.FK_Collect Requests_NGO">
+            <End Role="NGO" EntitySet="NGO" />
+            <End Role="Collect Requests" EntitySet="Collect Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Collect Requests_Restaurants" Association="Self.FK_Collect Requests_Restaurants">
+            <End Role="Restaurants" EntitySet="Restaurants" />
+            <End Role="Collect Requests" EntitySet="Collect Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_NGO" Association="Self.FK_Employees_NGO">
+            <End Role="NGO" EntitySet="NGO" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Restaurants_NGO" Association="Self.FK_Restaurants_NGO">
+            <End Role="NGO" EntitySet="NGO" />
+            <End Role="Restaurants" EntitySet="Restaurants" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MidAssignmentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmpId" />
+          </Key>
+          <Property Name="EmpId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmpName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmpAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmpContact" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmpUser" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmpPass" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NgoId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="NGO" Relationship="Self.FK_Employees_NGO" FromRole="Employees" ToRole="NGO" />
+          <NavigationProperty Name="Collect_Requests" Relationship="MidAssignmentModel.FK_Collect_Requests_Employees" FromRole="Employee" ToRole="Collect_Request" />
+        </EntityType>
+        <EntityType Name="NGO">
+          <Key>
+            <PropertyRef Name="NgoID" />
+          </Key>
+          <Property Name="NgoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NgoName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NgoAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NgoContact" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NgoUser" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NgoPass" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Employees_NGO" FromRole="NGO" ToRole="Employees" />
+          <NavigationProperty Name="Restaurants" Relationship="Self.FK_Restaurants_NGO" FromRole="NGO" ToRole="Restaurants" />
+          <NavigationProperty Name="Collect_Requests" Relationship="MidAssignmentModel.FK_Collect_Requests_NGO" FromRole="NGO" ToRole="Collect_Request" />
+        </EntityType>
+        <EntityType Name="Restaurant">
+          <Key>
+            <PropertyRef Name="ResId" />
+          </Key>
+          <Property Name="ResId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ResName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ResAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ResContact" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ResUser" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ResPass" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NgoId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="NGO" Relationship="Self.FK_Restaurants_NGO" FromRole="Restaurants" ToRole="NGO" />
+          <NavigationProperty Name="Collect_Requests" Relationship="MidAssignmentModel.FK_Collect_Requests_Restaurants" FromRole="Restaurant" ToRole="Collect_Request" />
+        </EntityType>
+        <Association Name="FK_Employees_NGO">
+          <End Role="NGO" Type="Self.NGO" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NGO">
+              <PropertyRef Name="NgoID" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="NgoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Restaurants_NGO">
+          <End Role="NGO" Type="Self.NGO" Multiplicity="1" />
+          <End Role="Restaurants" Type="Self.Restaurant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NGO">
+              <PropertyRef Name="NgoID" />
+            </Principal>
+            <Dependent Role="Restaurants">
+              <PropertyRef Name="NgoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MidAssignmentEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="NGOes" EntityType="Self.NGO" />
+          <EntitySet Name="Restaurants" EntityType="Self.Restaurant" />
+          <AssociationSet Name="FK_Employees_NGO" Association="Self.FK_Employees_NGO">
+            <End Role="NGO" EntitySet="NGOes" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Restaurants_NGO" Association="Self.FK_Restaurants_NGO">
+            <End Role="NGO" EntitySet="NGOes" />
+            <End Role="Restaurants" EntitySet="Restaurants" />
+          </AssociationSet>
+          <EntitySet Name="Collect_Requests" EntityType="MidAssignmentModel.Collect_Request" />
+          <AssociationSet Name="FK_Collect_Requests_Employees" Association="MidAssignmentModel.FK_Collect_Requests_Employees">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Collect_Request" EntitySet="Collect_Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Collect_Requests_NGO" Association="MidAssignmentModel.FK_Collect_Requests_NGO">
+            <End Role="NGO" EntitySet="NGOes" />
+            <End Role="Collect_Request" EntitySet="Collect_Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Collect_Requests_Restaurants" Association="MidAssignmentModel.FK_Collect_Requests_Restaurants">
+            <End Role="Restaurant" EntitySet="Restaurants" />
+            <End Role="Collect_Request" EntitySet="Collect_Requests" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Collect_Request">
+          <Key>
+            <PropertyRef Name="CollectReqId" />
+          </Key>
+          <Property Name="CollectReqId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RestaurantsId" Type="Int32" Nullable="false" />
+          <Property Name="Food_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Food_Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Food_Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Preservation_Time" Type="Int32" Nullable="false" />
+          <Property Name="Request_Time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Employee_Status" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Employee_id" Type="Int32" />
+          <Property Name="Distribution_Status" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NgoId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="MidAssignmentModel.FK_Collect_Requests_Employees" FromRole="Collect_Request" ToRole="Employee" />
+          <NavigationProperty Name="NGO" Relationship="MidAssignmentModel.FK_Collect_Requests_NGO" FromRole="Collect_Request" ToRole="NGO" />
+          <NavigationProperty Name="Restaurant" Relationship="MidAssignmentModel.FK_Collect_Requests_Restaurants" FromRole="Collect_Request" ToRole="Restaurant" />
+        </EntityType>
+        <Association Name="FK_Collect_Requests_Employees">
+          <End Type="MidAssignmentModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="MidAssignmentModel.Collect_Request" Role="Collect_Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpId" />
+            </Principal>
+            <Dependent Role="Collect_Request">
+              <PropertyRef Name="Employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Collect_Requests_NGO">
+          <End Type="MidAssignmentModel.NGO" Role="NGO" Multiplicity="1" />
+          <End Type="MidAssignmentModel.Collect_Request" Role="Collect_Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NGO">
+              <PropertyRef Name="NgoID" />
+            </Principal>
+            <Dependent Role="Collect_Request">
+              <PropertyRef Name="NgoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Collect_Requests_Restaurants">
+          <End Type="MidAssignmentModel.Restaurant" Role="Restaurant" Multiplicity="1" />
+          <End Type="MidAssignmentModel.Collect_Request" Role="Collect_Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="ResId" />
+            </Principal>
+            <Dependent Role="Collect_Request">
+              <PropertyRef Name="RestaurantsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MidAssignmentModelStoreContainer" CdmEntityContainer="MidAssignmentEntities">
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="MidAssignmentModel.Employee">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+                <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+                <ScalarProperty Name="EmpAddress" ColumnName="EmpAddress" />
+                <ScalarProperty Name="EmpContact" ColumnName="EmpContact" />
+                <ScalarProperty Name="EmpUser" ColumnName="EmpUser" />
+                <ScalarProperty Name="EmpPass" ColumnName="EmpPass" />
+                <ScalarProperty Name="NgoId" ColumnName="NgoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NGOes">
+            <EntityTypeMapping TypeName="MidAssignmentModel.NGO">
+              <MappingFragment StoreEntitySet="NGO">
+                <ScalarProperty Name="NgoID" ColumnName="NgoID" />
+                <ScalarProperty Name="NgoName" ColumnName="NgoName" />
+                <ScalarProperty Name="NgoAddress" ColumnName="NgoAddress" />
+                <ScalarProperty Name="NgoContact" ColumnName="NgoContact" />
+                <ScalarProperty Name="NgoUser" ColumnName="NgoUser" />
+                <ScalarProperty Name="NgoPass" ColumnName="NgoPass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Restaurants">
+            <EntityTypeMapping TypeName="MidAssignmentModel.Restaurant">
+              <MappingFragment StoreEntitySet="Restaurants">
+                <ScalarProperty Name="ResId" ColumnName="ResId" />
+                <ScalarProperty Name="ResName" ColumnName="ResName" />
+                <ScalarProperty Name="ResAddress" ColumnName="ResAddress" />
+                <ScalarProperty Name="ResContact" ColumnName="ResContact" />
+                <ScalarProperty Name="ResUser" ColumnName="ResUser" />
+                <ScalarProperty Name="ResPass" ColumnName="ResPass" />
+                <ScalarProperty Name="NgoId" ColumnName="NgoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Collect_Requests">
+            <EntityTypeMapping TypeName="MidAssignmentModel.Collect_Request">
+              <MappingFragment StoreEntitySet="Collect Requests">
+                <ScalarProperty Name="NgoId" ColumnName="NgoId" />
+                <ScalarProperty Name="Distribution_Status" ColumnName="Distribution_Status" />
+                <ScalarProperty Name="Employee_id" ColumnName="Employee_id" />
+                <ScalarProperty Name="Employee_Status" ColumnName="Employee_Status" />
+                <ScalarProperty Name="Request_Time" ColumnName="Request_Time" />
+                <ScalarProperty Name="Preservation_Time" ColumnName="Preservation_Time" />
+                <ScalarProperty Name="Food_Quantity" ColumnName="Food_Quantity" />
+                <ScalarProperty Name="Food_Description" ColumnName="Food_Description" />
+                <ScalarProperty Name="Food_Name" ColumnName="Food_Name" />
+                <ScalarProperty Name="RestaurantsId" ColumnName="RestaurantsId" />
+                <ScalarProperty Name="CollectReqId" ColumnName="CollectReqId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

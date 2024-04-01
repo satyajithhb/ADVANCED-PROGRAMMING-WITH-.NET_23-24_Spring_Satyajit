@@ -1,0 +1,75 @@
+﻿@model IEnumerable<MidAssignment_ZeroHunger.DTOs.CollectRequestDTO>
+
+@{
+    ViewBag.Title = "ShowAllCollectionReq";
+}
+
+<h2>All Collection Requests Status</h2>
+
+<table class="table" border="1">
+    <tr>
+        <th>
+            Collection Request No
+        </th>
+        <th>
+            Food Name
+        </th>
+        <th>
+            Food Description
+        </th>
+        <th>
+            Food Quantity
+        </th>
+        <th>
+            Maximum Preservation Time
+        </th>
+        <th>
+            Request Creation Time
+        </th>
+        <th>
+            Employee Status
+        </th>
+        <th>
+            Assigned to Employee ID
+        </th>
+        <th>
+            Distribution Status
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.CollectReqId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Food_Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Food_Description)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Food_Quantity)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Preservation_Time)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Request_Time)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Employee_Status)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Employee_id)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Distribution_Status)
+    </td>
+</tr>
+}
+</table>
+
+<div>
+    @Html.ActionLink("Go to Dashboard", "Dashboard")
+</div>

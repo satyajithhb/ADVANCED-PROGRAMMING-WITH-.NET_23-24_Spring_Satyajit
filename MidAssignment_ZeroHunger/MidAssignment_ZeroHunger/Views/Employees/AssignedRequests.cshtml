@@ -1,0 +1,46 @@
+﻿@model List<MidAssignment_ZeroHunger.EF.Collect_Request>
+
+@{
+    ViewBag.Title = "Assigned Requests";
+}
+
+<h2>Assigned Requests</h2>
+
+@if (Model != null && Model.Count > 0)
+{
+    <table class="table">
+        <tr>
+            <th>Food Name</th>
+            <th>Food Description</th>
+            <th>Food Quantity</th>
+            <th>Preservation Time</th>
+            <th>Request Time</th>
+            <th>Action</th>
+        </tr>
+        @foreach (var request in Model)
+        {
+            <tr>
+                <td>@request.Food_Name</td>
+                <td>@request.Food_Description</td>
+                <td>@request.Food_Quantity</td>
+                <td>@request.Preservation_Time</td>
+                <td>@request.Request_Time.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                <td>
+                    @using (Html.BeginForm("Distribute", "Employees", new { collectRequestId = request.CollectReqId }, FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="submit" value="Distribute" class="btn btn-success" />
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <h2>No distribution requests available.</h2>
+}
+
+<div>
+    @Html.ActionLink("Go to Dashboard", "Dashboard")
+</div>

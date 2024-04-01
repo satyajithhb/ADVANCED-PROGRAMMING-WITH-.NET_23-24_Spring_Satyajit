@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5f5e8b64ddba4df9a903834412f053b6" Name="Diagram1" ZoomLevel="82">
+        <EntityTypeShape EntityType="MidAssignmentModel.Employee" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MidAssignmentModel.NGO" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MidAssignmentModel.Restaurant" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
+        <AssociationConnector Association="MidAssignmentModel.FK_Employees_NGO" ManuallyRouted="false" />
+        <AssociationConnector Association="MidAssignmentModel.FK_Restaurants_NGO" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MidAssignmentModel.Collect_Request" Width="1.5" PointX="5.25" PointY="2.25" />
+        <AssociationConnector Association="MidAssignmentModel.FK_Collect_Requests_Employees" />
+        <AssociationConnector Association="MidAssignmentModel.FK_Collect_Requests_NGO" />
+        <AssociationConnector Association="MidAssignmentModel.FK_Collect_Requests_Restaurants" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

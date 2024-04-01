@@ -1,0 +1,57 @@
+﻿@model IEnumerable<MidAssignment_ZeroHunger.DTOs.RestaurantsDTO>
+
+@{
+    ViewBag.Title = "Dashboard";
+}
+@if (TempData["Msg"] != null)
+{
+    <span class="alert alert-success">@TempData["Msg"]</span>
+}
+
+<h1>Welcome to the dashboard, @Session["LoggedInRestaurantName"]!</h1>
+
+<p>
+    @Html.ActionLink("Create Food Collect Request", "CreateCollectRequest", "Restaurants", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Show your collection request", "ShowCollectionRequest", "Restaurants", null, new { @class = "btn btn-primary" })
+</p>
+<h2>All Restaurants Information</h2>
+<table class="table" border="1">
+    <tr>
+        <th>
+            Restaurants ID
+        </th>
+        <th>
+            Restaurants Name
+        </th>
+        <th>
+            Restaurants Address
+        </th>
+        <th>
+            Restaurants Contact
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ResId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ResName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ResAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ResContact)
+            </td>
+        </tr>
+    }
+</table>
+<div>
+    @using (Html.BeginForm("Logout", "Restaurants", FormMethod.Post))
+    {
+        <button type="submit" class="btn btn-danger">Logout</button>
+    }
+</div>
